@@ -1,16 +1,18 @@
 # action.yml
-name: "Hello World"
-description: "Greet someone and record the time"
+name: "Authorize"
+description: "Authorize a pull_request based on contributor's quorum"
 inputs:
-  who-to-greet: # id of input
-    description: "Who to greet"
+  quorum:
+    description: "Minimum contribution percetage for approval; Integer in range [0,100)"
     required: true
-    default: "World"
-outputs:
-  time: # id of output
-    description: "The time we greeted you"
+    default: "67"
+  daoAddress:
+    description: "Address or ENS of the DAO whose metadata you want to retrieve."
+    required: true
+
 runs:
   using: "docker"
   image: "Dockerfile"
   args:
-    - ${{ inputs.who-to-greet }}
+    - ${{ inputs.quorum }}
+    - ${{ inputs.daoAddress }}
