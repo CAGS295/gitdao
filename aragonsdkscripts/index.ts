@@ -29,5 +29,5 @@ const daoAddressOrEns: string = "0x0d870e2ea982298d7756ac6aefe90271dabb80b5"; //
 
 //getDaoDetails(client, daoAddressOrEns);
 //getDaoBalances(client, daoAddressOrEns);
-//getMembers(client, daoAddressOrEns);
+//getMembers(client, daoAddressOrEns, context);
 getPluginAddress(client, daoAddressOrEns);

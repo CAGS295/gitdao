@@ -1,5 +1,4 @@
-import { AssetBalance, Client, DaoBalancesQueryParams, TokenVotingClient, TokenVotingMember, DaoDetails } from '@aragon/sdk-client';
-import { context } from "../index";
+import { AssetBalance, Client, DaoBalancesQueryParams, TokenVotingClient, TokenVotingMember, DaoDetails, Context } from '@aragon/sdk-client';
 import { exit } from 'process';
 
 export async function getDaoDetails(client: Client, daoAddressOrEns: string) {
@@ -28,15 +27,14 @@ export async function getDaoBalances(client: Client, daoAddressOrEns: string) {
     console.log(daoBalances);
 }
 
-export async function getMembers(client: Client, daoAddressOrEns: string) {
+export async function getMembers(client: Client, daoAddressOrEns: string, ctx: Context): Promise<TokenVotingMember[]> {
     // Create a TokenVoting client
-    const tokenVotingClient: TokenVotingClient = new TokenVotingClient(context);
+    const tokenVotingClient: TokenVotingClient = new TokenVotingClient(ctx);
     const pluginAddress: string = await getPluginAddress(client, daoAddressOrEns);
     //const pluginAddress: string = "0x1a760a06d0e430472cb1c6c58639200dcd15e8c2"; //  The address of the plugin that DAO has installed. You can find this by calling `getDao(daoAddress)` and getting the DAO details .
-    const members: TokenVotingMember[] = await tokenVotingClient.methods.getMembers(
+    return await tokenVotingClient.methods.getMembers(
         { pluginAddress },
-    );
-    console.log(members);
+    )
 }
 
 
