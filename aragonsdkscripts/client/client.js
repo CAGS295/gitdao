@@ -36,14 +36,10 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.getMembers = exports.getDaoBalances = exports.getPluginAddress = exports.getDaoDetails = void 0;
 var sdk_client_1 = require("@aragon/sdk-client");
 var index_1 = require("../index");
-// Instantiate the general purpose client from the Aragon OSx SDK context.
-var client = new sdk_client_1.Client(index_1.context);
-// Address or ENS of the DAO whose metadata you want to retrieve.
-//const daoAddressOrEns: string = "0xc432356f9f2da794dda3df10706ea34dc18a725d"; // ea.dao.eth
-var daoAddressOrEns = "0x0d870e2ea982298d7756ac6aefe90271dabb80b5"; // gitdao testnet
-function getDaoDetails() {
+function getDaoDetails(client, daoAddressOrEns) {
     return __awaiter(this, void 0, void 0, function () {
         var dao;
         return __generator(this, function (_a) {
@@ -57,8 +53,9 @@ function getDaoDetails() {
         });
     });
 }
+exports.getDaoDetails = getDaoDetails;
 // This function retrieves the address of a plugin installed in a DAO.
-function getPluginAddress() {
+function getPluginAddress(client, daoAddressOrEns) {
     return __awaiter(this, void 0, void 0, function () {
         var dao, pluginId, plugin;
         return __generator(this, function (_a) {
@@ -81,7 +78,8 @@ function getPluginAddress() {
         });
     });
 }
-function getDaoBalances() {
+exports.getPluginAddress = getPluginAddress;
+function getDaoBalances(client, daoAddressOrEns) {
     return __awaiter(this, void 0, void 0, function () {
         var daoBalances;
         return __generator(this, function (_a) {
@@ -95,14 +93,15 @@ function getDaoBalances() {
         });
     });
 }
-function getMembers() {
+exports.getDaoBalances = getDaoBalances;
+function getMembers(client, daoAddressOrEns) {
     return __awaiter(this, void 0, void 0, function () {
         var tokenVotingClient, pluginAddress, members;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     tokenVotingClient = new sdk_client_1.TokenVotingClient(index_1.context);
-                    return [4 /*yield*/, getPluginAddress()];
+                    return [4 /*yield*/, getPluginAddress(client, daoAddressOrEns)];
                 case 1:
                     pluginAddress = _a.sent();
                     return [4 /*yield*/, tokenVotingClient.methods.getMembers({ pluginAddress: pluginAddress })];
@@ -114,7 +113,4 @@ function getMembers() {
         });
     });
 }
-//getDaoDetails();
-//getDaoBalances();
-getMembers();
-//getPluginAddress();
+exports.getMembers = getMembers;
