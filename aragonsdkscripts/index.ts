@@ -30,4 +30,6 @@ const daoAddressOrEns: string = "0x0d870e2ea982298d7756ac6aefe90271dabb80b5"; //
 //getDaoDetails(client, daoAddressOrEns);
 //getDaoBalances(client, daoAddressOrEns);
 //getMembers(client, daoAddressOrEns, context);
-getPluginAddress(client, daoAddressOrEns);
+
+const pluginId = 'token-voting.plugin.dao.eth'; // The id you're searching for
+getPluginAddress(client, daoAddressOrEns, pluginId);
